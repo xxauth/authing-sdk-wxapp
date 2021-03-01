@@ -1,0 +1,11 @@
+node_modules
+src
+test
+.idea/*
+
+coverage
+.nyc_output
+*.log
+
+package-lock.json
+.env
