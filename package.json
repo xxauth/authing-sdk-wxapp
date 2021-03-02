@@ -1,6 +1,6 @@
 {
   "name": "authing-sdk-wxapp",
-  "version": "4.9.0",
+  "version": "4.9.1",
   "main": "./dist/index.js",
   "repository": "git@git.lucfish.com:sdk/authing-sdk-wxapp.git",
   "author": "developer <developer@lucfish.com>",
