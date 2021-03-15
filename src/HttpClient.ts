@@ -39,12 +39,22 @@ export class HttpClient {
     }
     config.headers = headers;
     config.timeout = this.options.timeout;
-    const { data } = await this.axios.request(config);
-    const { code, message } = data;
-    if (code !== 200) {
-      this.options.onError && this.options.onError(code, message);
-      throw new Error(JSON.stringify({ code, message, data: data.data }));
-    }
-    return data.data;
+
+    return new Promise((resolve, reject) => {
+      wx.request({
+        method: config.method,
+        url: config.url,
+        data: config.data,
+        header: config.headers,
+        complete: (res: any) => {
+          const { code, message } = res.data;
+          if (code !== 200) {
+            this.options.onError && this.options.onError(code, message);
+            return reject(JSON.stringify({ code, message, data: res.data.data }));
+          }
+          return resolve(res.data.data);
+        }
+      })
+    })
   }
 }
